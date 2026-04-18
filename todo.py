@@ -20,11 +20,6 @@ class Do :
     def task_done(self):
         self.status = True
     
-def DecodeDO(Dictionary:dict) -> Do:
-    try:
-        Do(task = Dictionary['task'],status=Dictionary['status'])
-    except KeyError:
-        print("KEY ERROR IN THE \'DecodeDo\' function")
 
 class Todo:
     List:list[Do] = []
