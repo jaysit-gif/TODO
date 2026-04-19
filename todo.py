@@ -1,20 +1,27 @@
+class Priority:
+    dictionary = {'no':'\033[96m','high':'\033[94m','medium':'\033[93m','low':'\033[92m'}
 
 class Do :
-    def __init__(self,task:str = 'NO TASK',status = False):
+    
+    def __init__(self,task:str = 'NO TASK',status = False,priority:str = 'no'):
         try:
             self.task = task
             self.status:bool = status
+            self.priority = priority
         except Exception as e:
             print(f'ERROR in constructor {e}')          
 
     def __str__(self):
-        return self.task 
+        try:
+            return f'{Priority.dictionary[self.priority]}{self.task}\033[0m'
+        except KeyError as e:
+            print(e)
     
     def __repr__(self):
         return self.task
     
     def encode(self)->dict:
-        Dictionary:dict = {'task':self.task,'status':self.status}
+        Dictionary:dict = {'task':self.task,'status':self.status,'priority':self.priority}
         return Dictionary
     
     def task_done(self):
@@ -27,10 +34,11 @@ class Todo:
     def add(cls):
       try:  
         while True:
-            s = input('ADD TASK(input \'exit\' to exit): ')
+            s = input('ADD TASK(input \'exit\' to exit): ')           
             if s == 'exit':
                 break
-            d = Do(task = s)
+            p = input('Priority Order(no/low/medium/high): ').lower()
+            d = Do(task = s,priority=p)
             Todo.List.append(d)
         return Todo.List
       except (TypeError, AttributeError, KeyError) as e:
@@ -48,7 +56,7 @@ class Todo:
         i = 1
         for obj in Todo.List:
             if obj.status:
-                print(f'\033[95m{i}. {obj} \033[0m')
+                print(f'\033[41m{i}. {obj} \033[0m')
             else:    
                 print(f'{i}. {obj}')
             i+=1    
@@ -71,6 +79,7 @@ class Todo:
             Todo.show()
             indice = int(input('index: '))
             s = input('Task: ')
+            p = input('priority(no/low/high/medium): ').lower()
             d = Do(task=s)
             Todo.List.insert(indice,d)
             return Todo.List
@@ -97,7 +106,7 @@ class Todo:
 def DecodeTodo(List:list[dict]):
     try:
         for objs in List:
-            Todo.List.append(Do(task=objs['task'],status=objs['status']))
+            Todo.List.append(Do(task=objs['task'],status=objs['status'],priority=objs['priority']))
         return Todo.List
     except KeyError as e:
         print(f'\033[91m \033[1m \033[4m{e}\033[0m')
