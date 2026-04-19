@@ -40,7 +40,7 @@ def insert():
 
 @cli.command()
 def allkill():
-    """Its deletes all the tasks"""
+    """It deletes all the tasks"""
     Todo.kill_all()
     print("Cleared the list")
     writetoJSON()
