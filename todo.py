@@ -101,7 +101,13 @@ class Todo:
         L:list[dict] = []
         for obj in Todo.List:
             L.append(obj.encode())
-        return L    
+        return L  
+
+    @classmethod
+    def kill_all(cls):
+        while len(Todo.List) != 0:
+            Todo.List.pop()
+        return Todo.List
 
 def DecodeTodo(List:list[dict]):
     try:

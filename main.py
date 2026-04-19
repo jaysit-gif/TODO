@@ -38,6 +38,13 @@ def insert():
     Todo.insert_task()
     writetoJSON()
 
+@cli.command()
+def allkill():
+    """Its deletes all the tasks"""
+    Todo.kill_all()
+    print("Cleared the list")
+    writetoJSON()
+
 if __name__ == '__main__':
     readfromJSON()
-    cli()        # ← Just call the group
+    cli()        
