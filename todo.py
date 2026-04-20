@@ -1,5 +1,5 @@
 class Priority:
-    dictionary = {'no':'\033[96m','high':'\033[94m','medium':'\033[93m','low':'\033[92m'}
+    dictionary = {'no':'\033[97m','high':'\033[94m','medium':'\033[93m','low':'\033[92m'}
 
 class Do :
     
