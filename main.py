@@ -45,6 +45,12 @@ def allkill():
     print("Cleared the list")
     writetoJSON()
 
+@cli.command()
+def edit():
+    Todo.edit()
+    print('done editing')
+    writetoJSON()
+
 if __name__ == '__main__':
     readfromJSON()
     cli()        

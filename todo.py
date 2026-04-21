@@ -108,6 +108,20 @@ class Todo:
         while len(Todo.List) != 0:
             Todo.List.pop()
         return Todo.List
+    
+    @classmethod
+    def edit(cls):
+        try:
+            Todo.show()
+            index = int(input('Index: '))
+            task_name = input('Task:  ')
+            prior = input('Priority: ')
+            prev = Todo.List[index-1]
+            Todo.List[index-1] = Do(task=task_name,priority=prior)
+            print(f'Changed {prev} to {Todo.List[index-1]}')
+            return Todo.List
+        except IndexError as e:
+            print(f'\033[91m \033[1m \033[4m{e}\033[0m')
 
 def DecodeTodo(List:list[dict]):
     try:
